@@ -37,3 +37,8 @@ class GameCategoryList(generics.ListCreateAPIView):
     filter_fields = ('name',)
     search_fields = ('^name',)
     ordering_fields = ('name',)
+
+class GameCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = GameCategory.objects.all()
+    serializer_class = GameCategorySerializer
+    name = 'gamecategory-detail'
