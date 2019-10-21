@@ -24,3 +24,9 @@ class GameList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save()
+
+class GameDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Game.objects.all()
+    serializer_class = GameSerializer
+    name = 'game-detail'
+    
