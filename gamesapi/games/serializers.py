@@ -14,3 +14,13 @@ class GameSerializer(serializers.ModelSerializer):
             'name',
             'release_date',
             'played')
+
+class GameCategorySerializer(serializers.ModelSerializer):
+    games = GameSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = GameCategory
+        fields = (
+            'pk',
+            'name',
+            'games')
