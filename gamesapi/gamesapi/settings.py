@@ -126,5 +126,9 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '5/hour',
         'user': '20/hour',
-        'game-categories': '30/hour',}
+        'game-categories': '30/hour',},
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',),
 }
