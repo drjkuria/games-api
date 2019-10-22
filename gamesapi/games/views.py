@@ -66,4 +66,5 @@ class ApiRoot(generics.GenericAPIView):
         return Response({
             'games': reverse(GameList.name, request=request),
             'game-categories': reverse(GameCategoryList.name, request=request),
+            'users': reverse(UserList.name, request=request),
             })
