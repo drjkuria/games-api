@@ -13,6 +13,7 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = (
+            'owner',
             'game_category',
             'name',
             'release_date',
