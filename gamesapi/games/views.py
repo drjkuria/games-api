@@ -19,6 +19,11 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     name = 'user-list'
 
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    name = 'user-detail'
+
 class GameList(generics.ListCreateAPIView):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
