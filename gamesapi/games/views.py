@@ -40,7 +40,7 @@ class GameList(generics.ListCreateAPIView):
         'release_date',)
 
     def perform_create(self, serializer):
-        serializer.save()
+        serializer.save(owner=self.request.user)
 
 class GameDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Game.objects.all()
