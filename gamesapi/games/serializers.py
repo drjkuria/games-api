@@ -6,6 +6,7 @@ from games.models import GameCategory
 from games.models import Game
 
 class GameSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     game_category = serializers.SlugRelatedField(queryset=GameCategory.objects.all(),
         slug_field='name')
 
