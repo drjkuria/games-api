@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from django.contrib.auth.models import User
+
 from games.models import GameCategory
 from games.models import Game
 
@@ -24,3 +26,8 @@ class GameCategorySerializer(serializers.ModelSerializer):
             'pk',
             'name',
             'games')
+
+class UserGameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = ('name',)
