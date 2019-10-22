@@ -31,3 +31,13 @@ class UserGameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ('name',)
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    games = UserGameSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'username',
+            'games')
