@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from games.models import GameCategory
 from games.models import Game
+from games.models import Player
+from games.models import PlayerScore
 
 class GameSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -43,3 +45,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'pk',
             'username',
             'games')
+
+class ScoreSerializer(serializers.HyperlinkedModelSerializer):
+    game = GameSerializer()
+    class Meta:
+        model = PlayerScore
+        fields = (
+            'url',
+            'pk',
+            'score',
+            'score_date',
+            'game',
+            )
