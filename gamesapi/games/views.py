@@ -134,6 +134,11 @@ class PlayerScoreList(generics.ListCreateAPIView):
         'score_date',
         )
 
+class PlayerScoreDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PlayerScore.objects.all()
+    serializer_class = PlayerScoreSerializer
+    name = 'playerscore-detail'
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
     def get(self, request, *args, **kwargs):
