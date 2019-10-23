@@ -143,7 +143,9 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
     def get(self, request, *args, **kwargs):
         return Response({
-            'games': reverse(GameList.name, request=request),
+            'players': reverse(PlayerList.name, request=request),
             'game-categories': reverse(GameCategoryList.name, request=request),
+            'games': reverse(GameList.name, request=request),
+            'scores': reverse(PlayerScoreList.name, request=request),
             'users': reverse(UserList.name, request=request),
             })
