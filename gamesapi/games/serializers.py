@@ -36,7 +36,7 @@ class UserGameSerializer(serializers.ModelSerializer):
         model = Game
         fields = ('name',)
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     games = UserGameSerializer(many=True, read_only=True)
 
     class Meta:
@@ -46,7 +46,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'username',
             'games')
 
-class ScoreSerializer(serializers.HyperlinkedModelSerializer):
+class ScoreSerializer(serializers.ModelSerializer):
     game = GameSerializer()
     class Meta:
         model = PlayerScore
@@ -58,7 +58,7 @@ class ScoreSerializer(serializers.HyperlinkedModelSerializer):
             'game',
             )
 
-class PlayerSerializer(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     scores = ScoreSerializer(many=True, read_only=True)
     gender = serializers.ChoiceField(
         choices=Player.GENDER_CHOICES)
@@ -74,4 +74,19 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
             'gender',
             'gender_description',
             'scores',
+            )
+
+class PlayerScoreSerializer(serializers.ModelSerializer):
+    player = serializers.SlugRelatedField(queryset=Player.objects.all(), slug_field='name')
+    game = serializers.SlugRelatedField(queryset=Game.objects.all(), slug_field='name')
+
+    class Meta:
+        model = PlayerScore
+        fields = (
+            'url',
+            'pk',
+            'score',
+            'score_date',
+            'player',
+            'game',
             )
