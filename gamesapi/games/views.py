@@ -12,9 +12,13 @@ from rest_framework.throttling import ScopedRateThrottle
 
 from games.models import Game
 from games.models import GameCategory
+from games.models import Player
+from games.models import PlayerScore
 from games.serializers import GameSerializer
 from games.serializers import GameCategorySerializer
 from games.serializers import UserSerializer
+from games.serializers import PlayerSerializer
+from games.serializers import PlayerScoreSerializer
 from games.permissions import IsOwnerOrReadOnly
 
 
@@ -73,6 +77,21 @@ class GameCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     name = 'gamecategory-detail'
     throttle_scope = 'game-categories'
     throttle_classes = (ScopedRateThrottle,)
+
+class PlayerList(generics.ListCreateAPIView):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+    name = 'player-list'
+    filter_fields = (
+        'name',
+        'gender',
+        )
+    search_fields = (
+        '^name',
+        )
+    ordering_fields = (
+        'name',
+        )
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
