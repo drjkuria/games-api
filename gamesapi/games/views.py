@@ -124,6 +124,16 @@ class PlayerScoreFilter(FilterSet):
             'game_name',
             )
 
+class PlayerScoreList(generics.ListCreateAPIView):
+    queryset = PlayerScore.objects.all()
+    serializer_class = PlayerScoreSerializer
+    name = 'playerscore-list'
+    filter_class = PlayerScoreFilter
+    ordering_fields = (
+        'score',
+        'score_date',
+        )
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
     def get(self, request, *args, **kwargs):
